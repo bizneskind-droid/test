@@ -160,38 +160,32 @@
 # print(lst)
 
 
-# a, b, c = int(input()), int(input()), int(input())
-# up = -b / (2 * a), (4 * a * c - b ** 2) / (4 * a)
-# print(up)
+a, b, c = int(input()), int(input()), int(input())
+up = -b / (2 * a), (4 * a * c - b ** 2) / (4 * a)
+print(up)
 
 
-# n = int(input())
-# b = ()
-# for i in range(n):
-#     a = input()
-#     print(a)
-#     if a[-1] > 3:
-#         b += (a,)
-# print()
-# print(b, sep='\n') 
+n = int(input())
+b = ()
+for i in range(n):
+    a = input()
+    print(a)
+    if a[-1] > 3:
+        b += (a,)
+print()
+print(b, sep='\n') 
 
 
+print('Hello, World!')
+print('Hello, World!')
+
+def print_num():
+    print(42)
 
 
+print_num()
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
+print('hello, me')
 
 

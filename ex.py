@@ -1,1 +1,1 @@
-print()
+print('Nothing to see here')
