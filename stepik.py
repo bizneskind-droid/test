@@ -179,13 +179,6 @@ print(b, sep='\n')
 print('Hello, World!')
 print('Hello, World!')
 
-def print_num():
-    print(42)
 
-
-print_num()
-
-
-print('hello, me')
 
 
