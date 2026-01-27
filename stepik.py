@@ -176,8 +176,6 @@ print()
 print(b, sep='\n') 
 
 
-print('Hello, World!')
-print('Hello, World!')
 
 
 
