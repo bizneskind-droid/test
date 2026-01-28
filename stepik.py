@@ -160,7 +160,7 @@
 # print(lst)
 
 
-
+print()
 
 
 n = int(input())
