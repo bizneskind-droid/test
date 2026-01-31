@@ -160,21 +160,132 @@
 # print(lst)
 
 
-print()
+# n, m, k, x, y, z = [int(input()) for _ in range(6)]
+# total = z + n + m +k - x - y
+# print(total)
 
 
-n = int(input())
-b = ()
-for i in range(n):
-    a = input()
-    print(a)
-    if a[-1] > 3:
-        b += (a,)
-print()
-print(b, sep='\n') 
+# n, m, k, x, y, z, t, a = [int(input()) for _ in range(8)]
+# v = n + m - x
+# r = m + k - y
+# l = n + k - z
+# only_n = n - l - v + t
+# only_m = m - v - r + t
+# only_k = k - l - r + t
+# one_book = only_n + only_m + only_k
+# print(one_book)
+# two_book = v - t + r - t + l - t
+# print(two_book)
+# no_book = a - one_book - two_book - t
+# print(no_book)
 
 
-print()
+# n = input()
+# uniq = set(n)
+# if len(uniq) == len(n):
+#     print('YES')
+# else:
+#     print('NO')
+
+
+# n = set(input() + input())
+# s = set(str(i) for i in range(10))
+# print('YES' if n == s else 'NO')
+
+# s = input().split()
+# myset = [set(i) for i in s]
+# print('YES' if myset[0] == myset[1] == myset[2] else 'NO')
+# myset = ''
+# for i in range(int(input())):
+#     s = input().lower()
+#     myset += s
+# myset = set(myset)
+# print(len(myset))
+
+# s = {
+#     ",",
+#     ".",
+#     ";",
+#     ":",
+#     "?",
+#     "!",
+#     "-",
+# }
+# txt = [i for i in input().lower() if i not in s]
+# txt = ''.join(txt).split()
+# uniq = set(txt)
+# print(len(uniq))
+
+
+# s = set()
+# numbers = [int(i) for i in input().split()]
+# for l in numbers:
+#     if l in s:
+#         print('YES')
+#     else:   
+#         print('NO')
+#         s.add(l)
+
+
+
+
+# n = int(input())
+# counter = 0
+# myset = set()
+# for _ in range(n):
+#     stat = input().split(': ')
+#     if stat[1] == 'Correct':
+#         counter += 1
+#         myset.add(stat[0])
+        
+
+# users = len(myset)
+# if counter:
+#     print(f'Верно решили {users} учащихся')
+#     procent = int(counter / n * 100 + 0.5)
+#     print(f'Из всех попыток {procent}% верных')
+# else:
+#     print('Вы можете стать первым, кто решит эту задачу')
+
+# set1 = set(int(i) for i in input().split())
+# set2 = set(int(i) for i in input().split())
+# set3 = set1.difference(set2)
+# print(*sorted(set3))
+
+# n = int(input())
+# myset = set(int(i) for i in input())
+# for _ in range(n - 1):
+#     s = (int(i) for i in input())
+#     myset &= set(s)
+
+# print(*sorted(myset))
+
+
+numbers = set(range(11))
+s1 = set(input().split())
+s2 = set(input().split())
+s3 = set(input().split())
+res = sorted((s1 | s2 | s3) ^ numbers, key=int)
+
+print(*res)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
