@@ -1,2 +1,2 @@
-print('Nothing to see here')
-print('Nothing to see here')
+lst = [input().split(': ')[1]]
+print(lst)
