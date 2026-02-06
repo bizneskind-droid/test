@@ -1,0 +1,4 @@
+.ai/mcp/
+.idea/
+.venv-first/
+__pycache__/

@@ -464,7 +464,7 @@
 #         max_v = v
 #         min_k = min(min_k, k)
 #         print(k)
-        
+
 # print(min_k)
 # pets = [
 #     ('Барсик', 'Маша', 'Петрова', 17),
@@ -486,7 +486,7 @@
 # mydict = {}
 # for word in lst:
 #     mydict[word] = mydict.get(word, 0) + 1
-    
+
 # min_v = mydict[lst[0]]
 # min_k = lst[0]
 
@@ -496,11 +496,9 @@
 #         min_k = k
 #     elif min_v == v:
 #         min_k = min(min_k, k)
-        
-        
+
+
 # print(min_k)
-
-
 
 
 # lst = input().split()
@@ -513,7 +511,7 @@
 #     else:
 #         mydict[i] = 0
 #         dublicate += f' {i}'
-    
+
 #     mydict[i] += 1
 
 # print(dublicate)
@@ -525,7 +523,7 @@
 #     s = input().split(': ')
 #     k, v = s[0].lower(), s[1]
 #     mydict[k] = v
-    
+
 # n2 = int(input())
 # for _ in range(n2):
 #     word = input().lower()
@@ -539,12 +537,12 @@
 # for i in s1:
 #     for j in i:
 #         d1[j] = d1.get(j, 0) + 1
-    
+
 # for i in s2:
 #     for j in i:
 #         d2[j] = d2.get(j, 0) + 1
-    
-# print('YES' if d1 == d2 else 'NO')    
+
+# print('YES' if d1 == d2 else 'NO')
 
 # n = int(input())
 # mydict = {}
@@ -552,7 +550,7 @@
 #     s1, s2 = input().split()
 #     mydict[s1] = s2
 #     mydict[s2] = s1
-    
+
 # word = input()
 # print(mydict[word])
 
@@ -570,7 +568,6 @@
 #         if city in mydict[country]:
 #             print(country)
 #             break
-
 
 
 # n1 = int(input())
@@ -597,5 +594,156 @@
 #             word = s.replace(key, k)
 #
 # print(s)
+# s = '3:animal 4:house 8:tree 2:color 21:moon 31:fire 12:ship'
+# res = {int(k): v for l in s.split() for k, v in [l.split(':')]}
+# print(res)
 
-print()
+# res = {
+#     i: [j for j in range(1, i + 1) if i % j == 0]
+#     for i in numbers
+# }
+# print(res)
+
+
+# lst = [
+#     {
+#         id: {name: grade for name, grade in zip(student_names, student_grades)}
+#         for id in student_ids
+#     }
+# ]
+#
+# print(lst)
+# my_dict = {
+#     'math_grades': [10, 7, 36, 14, 25], 'physics_grades': [14, 28, 7, 10, 36, 5],
+#     'chemistry_grades': [10, 14, 19, 20, 21], 'geography_grades': [10, 15, 19, 34],
+# }
+# res = {}
+# for i in my_dict:
+#     res[i] = []
+#     for j in my_dict[i]:
+#         if j < 21:
+#             res[i].append(j)
+# print(res)
+
+# res = []
+# for domen in emails:
+#     for user in emails[domen]:
+#         adress = user + '@' + domen
+#         res.append(adress)
+#
+# res.sort()
+# print(*res, sep='\n')
+#
+
+# def DNA_to_RNA(DNA):
+#     transfer = {'A': 'U', 'C': 'G', 'G': 'C', 'T': 'A'}
+#     RNA = ''
+#     for c in DNA:
+#         RNA += transfer[c]
+#     return RNA
+#
+# print(DNA_to_RNA(input()))
+#
+#
+# print('Hello World')
+
+# words = input().split()
+# mydict = {}
+# for word in words:
+#     mydict[word] = mydict.get(word, 0) + 1
+#     print(mydict[word], end=' ')
+
+# d = {
+#     1: "AEILNORSTU",
+#     2: "DG",
+#     3: "BCMP",
+#     4: "FHVWY",
+#     5: "K",
+#     8: "JX",
+#     10: "QZ"
+# }
+#
+# counter = 0
+# word = input()
+# for l in word:
+#     for n in d:
+#         if l in d[n]:
+#             counter += n
+#             break
+#
+# print(counter)
+#
+# def build_query_string(mydict):
+#     s = ''
+#     for key, value in sorted(mydict.items()):
+#         s += f'{key}={value}&'
+#
+#     return s[:-1]
+
+
+# def merge(values):
+#     mydict = {}
+#     for dct in values:
+#         for k, v in dct.items():
+#             mydict.setdefault(k, set()).add(v)
+#
+#     return mydict
+# s = {'write': 'W', 'read': 'R','execute': 'X'}
+# files = {}
+# for _ in range(int(input())):
+#     file, *permissions = input().split()
+#     files[file] = permissions
+#
+# for _ in range(int(input())):
+#     permission, file = input().split()
+#     permission = s[permission]
+#     if permission in files[file]:
+#         print('OK')
+#     else:
+#         print('Access denied')
+
+# mydict = {}
+# for _ in range(int(input())):
+#     name, goods, size = input().split()
+#     if name not in mydict:
+#         mydict[name] = {}
+#     if  goods not in mydict[name]:
+#         mydict[name].update({goods: 0})
+#
+#     mydict[name][goods] += int(size)
+#
+# for name, goods in mydict.items():
+#     goods = dict(goods)
+#     print(name + ':')
+#     for l in goods.items():
+#         print(*l)
+#
+# print(mydict.items())
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
