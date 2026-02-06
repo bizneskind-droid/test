@@ -1,4 +1,7 @@
-.ai/mcp/
+.ai/
 .idea/
 .venv-first/
 __pycache__/
+*.pyc
+*.pyo
+*.pyd

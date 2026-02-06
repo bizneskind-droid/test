@@ -723,6 +723,12 @@
 
 
 
+import random
+
+n = int(input())# количество попыток
+for _ in range(n):
+    coin = randit(0, 1)
+    print('Орел' if coin else 'Решка')
 
 
 
@@ -747,3 +753,50 @@
 
 
 
+
+
+
+
+
+def _multiply_matrices(a, b):
+    n = len(a)
+    result = [[0] * n for _ in range(n)]
+
+    for i in range(n):
+        for j in range(n):
+            cell = 0
+            for k in range(n):
+                cell += a[i][k] * b[k][j]
+            result[i][j] = cell
+
+    return result
+
+
+def _identity_matrix(size):
+    matrix = [[0] * size for _ in range(size)]
+    for i in range(size):
+        matrix[i][i] = 1
+    return matrix
+
+
+def matrix_power(matrix, power):
+    if not isinstance(power, int) or power < 0:
+        raise ValueError("power must be a non-negative integer")
+
+    if not matrix or any(not isinstance(row, list) for row in matrix):
+        raise ValueError("matrix must be a non-empty list of lists")
+
+    n = len(matrix)
+    if any(len(row) != n for row in matrix):
+        raise ValueError("matrix must be square")
+
+    result = _identity_matrix(n)
+    base = [row[:] for row in matrix]
+
+    while power > 0:
+        if power & 1:
+            result = _multiply_matrices(result, base)
+        base = _multiply_matrices(base, base)
+        power >>= 1
+
+    return result
