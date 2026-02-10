@@ -1,6 +1,6 @@
 .ai/
 .idea/
-.venv-first/
+venv/
 __pycache__/
 *.pyc
 *.pyo

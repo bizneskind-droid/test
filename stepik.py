@@ -721,18 +721,171 @@
 # print(mydict.items())
 
 
+# n = int(input())# количество попыток
+# password = ''
+# for _ in range(n):
+#     password += chr((randint(65, 90), randint(97, 122))[randint(0, 1)])
+#
+# print(password)
 
 
-import random
-
-n = int(input())# количество попыток
-for _ in range(n):
-    coin = randit(0, 1)
-    print('Орел' if coin else 'Решка')
-
-
+# numbers = list()
+# for _ in range(7):
+#     number = randint(1, 49)
+#     numbers.append(number)
+# numbers.sort()
+# print(*numbers)
 
 
+# from random import randint
+# def generate_ip():
+#     ip = []
+#     for _ in range(4):
+#         num = randint(0, 255)
+#         ip.append(str(num))
+#
+#     return '.'.join(ip)
+#
+#
+# print(generate_ip())
+
+
+# from random import choice as ch
+# import string
+# def generate_index():
+#     letters = string.ascii_uppercase
+#     digits = string.digits
+#     return f'{ch(letters)}{ch(letters)}{ch(digits)}{ch(digits)}_{ch(digits)}{ch(digits)}{ch(letters)}{ch(letters)}'
+#
+#
+# print(generate_index())
+
+
+# from random import randint as r
+# s = set()
+# while len(s) < 100:
+#     ticker = r(1_000_000, 9_999_999)
+#     if ticker in s:
+#         continue
+#     s.add(ticker)
+#     print(ticker)
+
+
+# from random import randint, sample as s
+#
+#
+# numbers = s(range(1, 76), 25)
+# bingo = [[0] * 5 for i in range(5)]
+# counter = 0
+# for i in range(5):
+#     for j in range(5):
+#         bingo[i][j] = str(numbers[counter]).ljust(3)
+#         counter += 1
+#
+# bingo[2][2] = '0'.ljust(3)
+# for row in bingo:
+#     print(*row)
+
+# from random import randrange as r
+#
+# lst = []
+# for _ in range(int(input())):
+#     lst.append(input())
+#
+# friends = lst.copy()
+# friend = friends[r(len(friends))]
+# for name in lst:
+#     while friend == name:
+#         friend = friends[r(len(friends))]
+#
+#     print(name, '-', friend)
+#     friends.remove(friend)
+#     if friends:  # Проверка, что список не пустой
+#         friend = friends[r(len(friends))]
+
+
+# from string import *  # noqa: F403
+# from random import sample as s
+
+# LETTER = "".join((set(ascii_letters) | set(digits)) - set("lI1oO0"))  # noqa: F405
+# uppers = "ABCDEFGHJKLMNPQRSTUVWXYZ"       # noqa: F405
+# lowers = "abcdefghijkmnpqrstuvwxyz"  # noqa: F405
+# digits = "23456789" # noqa: F405
+
+# def generate_password(length):
+#     password = []
+#     password.append(s(uppers, 1)[0])
+#     password.append(s(lowers, 1)[0])
+#     password.append(s(digits, 1)[0])
+#     password += s(LETTER, length - 3)
+#     return ''.join(s(password, length))
+    
+
+
+# def generate_passwords(count, length):
+#     lst = []
+#     for _ in range(count):
+#         lst.append(generate_password(length))
+#     return lst
+
+
+# n, m = int(input()), int(input())
+# passwords = generate_passwords(n, m)
+
+# print(*passwords, sep="\n")
+
+# from decimal import * 
+# num = Decimal(input())
+# n = -(num.as_tuple().exponent)
+# n = str(num)[-10:]
+# print(Decimal(min(n)) + Decimal(max(n)))
+
+import turtle
+
+speed = 5
+def move_up():                             # функция обратного вызова
+  x, y = turtle.pos()
+  turtle.setposition(x, y + speed)
+  
+def move_down():                           # функция обратного вызова
+  x, y = turtle.pos()
+  turtle.setposition(x, y - speed)
+
+def move_left():                           # функция обратного вызова
+  x, y = turtle.pos()
+  turtle.setposition(x - speed, y)
+
+def move_right():                          # функция обратного вызова
+  x, y = turtle.pos()
+  turtle.setposition(x + speed, y)
+  
+def change():                              # функция обратного вызова
+  if turtle.isvisible():
+    turtle.up()
+    turtle.hideturtle()
+  else:
+    turtle.down()
+    turtle.showturtle()
+    
+def speed_increase():                      # функция обратного вызова
+  global speed
+  speed += 1
+
+def speed_decrease():                      # функция обратного вызова
+  global speed
+  speed -= 1
+
+turtle.showturtle()                        # отображаем черепашку
+turtle.pensize(3)                          # устанавливаем размер пера
+turtle.Screen().listen()                   # устанавливаем фокус на экран черепашки
+
+turtle.Screen().onkey(move_up, 'Up')       # регистрируем функцию на нажатие клавиши наверх
+turtle.Screen().onkey(move_down, 'Down')   # регистрируем функцию на нажатие клавиши вниз
+turtle.Screen().onkey(move_left, 'Left')   # регистрируем функцию на нажатие клавиши налево
+turtle.Screen().onkey(move_right, 'Right') # регистрируем функцию на нажатие клавиши направо
+turtle.Screen().onkey(change, 'space')
+turtle.Screen().onkey(speed_increase, 'q')
+turtle.Screen().onkey(speed_decrease, 'w')  
 
 
 
@@ -758,45 +911,8 @@ for _ in range(n):
 
 
 
-def _multiply_matrices(a, b):
-    n = len(a)
-    result = [[0] * n for _ in range(n)]
-
-    for i in range(n):
-        for j in range(n):
-            cell = 0
-            for k in range(n):
-                cell += a[i][k] * b[k][j]
-            result[i][j] = cell
-
-    return result
 
 
-def _identity_matrix(size):
-    matrix = [[0] * size for _ in range(size)]
-    for i in range(size):
-        matrix[i][i] = 1
-    return matrix
 
 
-def matrix_power(matrix, power):
-    if not isinstance(power, int) or power < 0:
-        raise ValueError("power must be a non-negative integer")
 
-    if not matrix or any(not isinstance(row, list) for row in matrix):
-        raise ValueError("matrix must be a non-empty list of lists")
-
-    n = len(matrix)
-    if any(len(row) != n for row in matrix):
-        raise ValueError("matrix must be square")
-
-    result = _identity_matrix(n)
-    base = [row[:] for row in matrix]
-
-    while power > 0:
-        if power & 1:
-            result = _multiply_matrices(result, base)
-        base = _multiply_matrices(base, base)
-        power >>= 1
-
-    return result

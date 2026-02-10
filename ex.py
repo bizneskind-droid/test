@@ -1,2 +1,2 @@
-lst = [input().split(': ')[1]]
-print(lst)
+h = -1.2
+print(int(h - 0.5))
