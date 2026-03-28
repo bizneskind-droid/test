@@ -819,7 +819,6 @@
 #     password.append(s(digits, 1)[0])
 #     password += s(LETTER, length - 3)
 #     return ''.join(s(password, length))
-    
 
 
 # def generate_passwords(count, length):
@@ -834,66 +833,822 @@
 
 # print(*passwords, sep="\n")
 
-# from decimal import * 
+# from decimal import *
 # num = Decimal(input())
 # n = -(num.as_tuple().exponent)
 # n = str(num)[-10:]
 # print(Decimal(min(n)) + Decimal(max(n)))
 
-import turtle
 
-speed = 5
-def move_up():                             # функция обратного вызова
-  x, y = turtle.pos()
-  turtle.setposition(x, y + speed)
-  
-def move_down():                           # функция обратного вызова
-  x, y = turtle.pos()
-  turtle.setposition(x, y - speed)
+# def matrix(n=1, m=None, value=0):
+#     if m is None:
+#         m = n
+#     return [[value] * m for _ in range(n)]
 
-def move_left():                           # функция обратного вызова
-  x, y = turtle.pos()
-  turtle.setposition(x - speed, y)
+# print(matrix())         # матрица 1 × 1 из 0
+# print(matrix(3))        # матрица 3 × 3 из 0
+# print(matrix(2, 5))     # матрица 2 × 5 из 0
+# print(matrix(3, 4, 9))  # матрица 3 × 4 из 9
 
-def move_right():                          # функция обратного вызова
-  x, y = turtle.pos()
-  turtle.setposition(x + speed, y)
-  
-def change():                              # функция обратного вызова
-  if turtle.isvisible():
-    turtle.up()
-    turtle.hideturtle()
-  else:
-    turtle.down()
-    turtle.showturtle()
+# def sq_sum(*args):
+#     return sum(i ** 2 for i in args)
+
+
+# print(sq_sum())
+# print(sq_sum(2))
+# print(sq_sum(1.5, 2.5))
+# print(sq_sum(1, 2, 3))
+# print(sq_sum(1, 2, 3, 4, 5, 6, 7, 8, 9, 10))
+
+# def mean(*args):
+#    numbers = [i for i in args if type(i) is float or type(i) is int]
+#    if len(numbers) == 0:
+#        return 0
+#    avg = sum(numbers) / len(numbers)
+#    return avg
+
+
+# print(mean())
+# print(mean(7))
+# print(mean(1.5, True, ['stepik'], 'beegeek', 2.5, (1, 2)))
+# print(mean(True, ['stepik'], 'beegeek', (1, 2)))
+# print(mean(-1, 2, 3, 10, ('5')))
+# print(mean(1, 2, 3, 4, 5, 6, 7, 8, 9, 10))
+
+
+# def greet(name, *args):
+#     args =  (name,) + args
+#     return f'Hello, {' and '.join(args)}!'
+
+
+# print(greet('Timur'))
+# print(greet('Timur', 'Roman'))
+# print(greet('Timur', 'Roman', 'Ruslan'))
+
+
+# def print_products(*args):
+#     products = [product for product in args if type(product) is str and product.isalpha()]
+#     if products:
+#         mydict = {f'{i + 1})': products[i] for i in range(len(products))}
+#         for item in mydict.items():
+#             print(*item)
+#     else:
+#         print('Нет продуктов')
+# print_products('Бананы', [1, 2], ('Stepik',), 'Яблоки', '', 'Макароны', 5, True)
+
+
+# m = {1: 'one', 2: 'two', 3: 'three'}
+# lst = sorted(m.items(), key=lambda x: x[1])
+# print(lst)
+
+
+# def start():
+#     # тело функции start
+#     print('start')
+
+
+# def stop():
+#     # тело функции stop
+#     print('stop')
+
+
+# def pause():
+#     # тело функции pause
+#     print('pause')
+
+
+# commands = {'start': start, 'stop': stop, 'pause': pause}  # словарь соответствия команда → функция
+
+# command = input()  # считываем название команды
+
+# commands[command]()  # вызываем нужную функцию через словарь по ключу
+
+
+# сортируем по сумме кортежа
+
+
+# def generator_square_polynom(a, b, c):
+#     def square_polynom(x):
+#         return a * x**2 + b * x + c
+
+#     return square_polynom
+
+
+# f = generator_square_polynom(a=1, b=2, c=1)
+# g = generator_square_polynom(a=2, b=0, c=-3)
+# h = generator_square_polynom(a=-3, b=-10, c=50)
+
+# print(f(1))
+# print(g(2))
+# print(h(-1))
+# print(f.__closure__)
+
+
+# lst = ('12 14 79 7 4 123 45 90 111').split()
+
+# print(*sorted(lst, key=lambda x: (sum[int(i) for i in x], int(x)))
+
+# def generation_variants(n, m=None, prefix=None, used=None):
+#     m = m if m is not None else n
+
+#     if m == 0:
+#         print(*prefix)
+#         return
+
+#     prefix = prefix or []
+#     used = used or [False for _ in range(n + 1)]
+
+#     for i in range(1, n + 1):
+#         if used[i]:
+#             continue
+
+#         prefix.append(i)
+#         used[i] = True
+
+#         generation_variants(n, m-1, prefix, used)
+
+#         prefix.pop()
+#         used[i] = False
+
+
+# generation_variants(4)
+
+# def merge(lst1, lst2):
+#     a, b = 0, 0
+#     len1, len2 = len(lst1), len(lst2)
+#     lst = []
+
+#     while a < len1 and b < len2:
+#         if lst1[a] <= lst2[b]:
+#             lst.append(lst1[a])
+#             a += 1
+#         else:
+#             lst.append(lst2[b])
+#             b += 1
+
+
+#     lst += lst1[a:]
+#     lst += lst2[b:]
+
+#     return lst
+
+# def merge_sort(lst):
+#     if len(lst) <= 1:
+#         return
+
+#     middle = len(lst) // 2
+
+#     left = lst[:middle]
+#     right = lst[middle:]
+
+#     merge_sort(left)
+#     merge_sort(right)
+
+#     res = merge(left, right)
+
+#     for i in range(len(lst)):
+#         lst[i] = res[i]
+
+
+# tests()
+
+
+# def NOD(a, b):
+#     if b == 0:
+#         return a
+
+#     return NOD(b, a % b)
+
+
+# print(NOD(18, 48))
+# def tests():
+#     a = [1, 3, 4, 6, 3, 4, 3, 1, 0, 432]
+#     hoana_sort(a)
+#     print(*a)
+
+#     a = [7, 7, 8, 9, -1, 34, 4, 8]
+#     hoana_sort(a)
+#     print(*a)
+
+
+# def hoana_sort(lst):
+#     if len(lst) <= 1:
+#         return
+
+#     barrier = lst[0]
+#     left, middle, right = [], [], []
+
+#     for x in lst:
+#         if x < barrier:
+#             left.append(x)
+#         elif x == barrier:
+#             middle.append(x)
+#         else:
+#             right.append(x)
+
+#     hoana_sort(left)
+#     hoana_sort(right)
+
+#     res = left + middle + right
+#     for i in range(len(res)):
+#         lst[i] = res[i]
+
+
+# tests()
+
+# def map(function, items):
+#     result = []
+#     for item in items:
+#         result.append(function(item))
+#     return result
+
+# def round(number):
+#     return f'{number:.2f}'
+
+
+# numbers = [3.56773, 5.57668, 4.00914, 56.24241, 9.01344, 32.12013, 23.22222, 90.09873, 45.45, 314.1528, 2.71828, 1.41546]
+
+# print(*map(round, numbers), sep='\n')
+
+
+# def map(function, items):
+#     result = []
+#     for item in items:
+#         result.append(function(item))
+#     return result
+
+# def func(num):
+#     if 99 < num < 1000 and num % 5 == 2:
+#         return num
+
+# def func1(num):
+#     return num**3
+
+
+# def filter(function, items):
+#     result = []
+#     for item in items:
+#         if function(item):
+#             result.append(item)
+#     return result
+
+
+# numbers = [1014, 1321, 675, 1215, 56, 1386, 1385, 431, 1058, 486, 1434, 696, 1016, 1084, 424, 1189, 475, 95, 1434, 1462, 815, 776, 657, 1225, 912, 537, 1478, 1176, 544, 488, 668, 944, 207, 266, 1309, 1027, 257, 1374, 1289, 1155, 230, 866, 708, 144, 1434, 1163, 345, 394, 560, 338, 232, 182, 1438, 1127, 928, 1309, 98, 530, 1013, 898, 669, 105, 130, 1363, 947, 72, 1278, 166, 904, 349, 831, 1207, 1496, 370, 725, 926, 175, 959, 1282, 336, 1268, 351, 1439, 186, 273, 1008, 231, 138, 142, 433, 456, 1268, 1018, 1274, 387, 120, 340, 963, 832, 1127]
+
+# print(*map(func1, filter(func, numbers)), sep='\n')
+
+
+# def increase(num):
+#     return num + 7
+
+
+# numbers = [1, 2, 3, 4, 5, 6]
+# new_numbers = sum(map(increase, numbers))
+
+# print(new_numbers)
+
+# def generator_square_polynom(a, b, c):
+#     return lambda x: a*x**2 + b*x + c
+
+# a = generator_square_polynom(1, 3, 4)
+
+# print(a)
+
+# from functools import reduce
+
+# data = [
+#     ["Tokyo", 35676000, "primary"],
+#     ["New York", 19354922, "nan"],
+#     ["Mexico City", 19028000, "primary"],
+#     ["Mumbai", 18978000, "admin"],
+#     ["Sao Paulo", 18845000, "admin"],
+#     ["Delhi", 15926000, "admin"],
+#     ["Shanghai", 14987000, "admin"],
+#     ["Kolkata", 14787000, "admin"],
+#     ["Los Angeles", 12815475, "nan"],
+#     ["Dhaka", 12797394, "primary"],
+#     ["Buenos Aires", 12795000, "primary"],
+#     ["Karachi", 12130000, "admin"],
+#     ["Cairo", 11893000, "primary"],
+#     ["Rio de Janeiro", 11748000, "admin"],
+#     ["Osaka", 11294000, "admin"],
+#     ["Beijing", 11106000, "primary"],
+#     ["Manila", 11100000, "primary"],
+#     ["Moscow", 10452000, "primary"],
+#     ["Istanbul", 10061000, "admin"],
+#     ["Paris", 9904000, "primary"],
+# ]
+
+# big_cities = filter(lambda x: x[1] > 10_000_000 and x[2] == 'primary', data)
+
+# name_cities = sorted(map(lambda x: x[0], big_cities))
+
+# result = 'Cities: ' + reduce(lambda x, y: x + ', ' + y, name_cities)
+
+# print(result)
+
+# numbers = [46, 61, 34, 17, 56, 26, 93, 1, 3, 82, 71, 37, 80, 27, 77, 94, 34, 100, 36, 81, 33, 81, 66, 83, 41, 80, 80, 93, 40, 34, 32, 16, 5, 16, 40, 93, 36, 65, 8, 19, 8, 75, 66, 21, 72, 32, 41, 59, 35, 64, 49, 78, 83, 27, 57, 53, 43, 35, 48, 17, 19, 40, 90, 57, 77, 56, 80, 95, 90, 27, 26, 6, 4, 23, 52, 39, 63, 74, 15, 66, 29, 88, 94, 37, 44, 2, 38, 36, 32, 49, 5, 33, 60, 94, 89, 8, 36, 94, 46, 33]
+
+# print(*map(lambda n: n // 2 if n % 2 == 0 else n, filter(lambda n: n < 48, numbers)))
+
+
+# data = [
+#     (19542209, "New York"),
+#     (4887871, "Alabama"),
+#     (1420491, "Hawaii"),
+#     (626299, "Vermont"),
+#     (1805832, "West Virginia"),
+#     (39865590, "California"),
+#     (11799448, "Ohio"),
+#     (10711908, "Georgia"),
+#     (10077331, "Michigan"),
+#     (10439388, "Virginia"),
+#     (7705281, "Washington"),
+#     (7151502, "Arizona"),
+#     (7029917, "Massachusetts"),
+#     (6910840, "Tennessee"),
+# ]
+
+# data.sort(key=lambda item: item[1][-1], reverse=True)
+
+# for population, state in data:
+#     print(f'{state}: {population}')
+
+
+# mixed_list = ['tuesday', 'abroad', 'abuse', 'beside', 'monday', 'abate', 'accessory', 'absorb', 1384878, 'sunday', 'about', 454805, 'saturday', 'abort', 2121919, 2552839, 977970, 1772933, 1564063, 'abduct', 901271, 2680434, 'bicycle', 'accelerate', 1109147, 942908, 'berry', 433507, 'bias', 'bestow', 1875665, 'besides', 'bewilder', 1586517, 375290, 1503450, 2713047, 'abnormal', 2286106, 242192, 701049, 2866491, 'benevolent', 'bigot', 'abuse', 'abrupt', 343772, 'able', 2135748, 690280, 686008, 'beyond', 2415643, 'aboard', 'bet', 859105, 'accident', 2223166, 894187, 146564, 1251748, 2851543, 1619426, 2263113, 1618068, 'berth', 'abolish', 'beware', 2618492, 1555062, 'access', 'absent', 'abundant', 2950603, 'betray', 'beverage', 'abide', 'abandon', 2284251, 'wednesday', 2709698, 'thursday', 810387, 'friday', 2576799, 2213552, 1599022, 'accept', 'abuse', 'abound', 1352953, 'bid', 1805326, 1499197, 2241159, 605320, 2347441]
+
+# print(max(mixed_list, key=lambda x: (type(x) is int, x)))
+
+
+# mixed_list = ['beside', 48, 'accelerate', 28, 'beware', 'absorb', 'besides', 'berry', 15, 65, 'abate', 'thursday', 76, 70, 94, 35, 36, 'berth', 41, 'abnormal', 'bicycle', 'bid', 'sunday', 'saturday', 87, 'bigot', 41, 'abort', 13, 60, 'friday', 26, 13, 'accident', 'access', 40, 26, 20, 75, 13, 40, 67, 12, 'abuse', 78, 10, 80, 'accessory', 20, 'bewilder', 'benevolent', 'bet', 64, 38, 65, 51, 95, 'abduct', 37, 98, 99, 14, 'abandon', 'accept', 46, 'abide', 'beyond', 19, 'about', 76, 26, 'abound', 12, 95, 'wednesday', 'abundant', 'abrupt', 'aboard', 50, 89, 'tuesday', 66, 'bestow', 'absent', 76, 46, 'betray', 47, 'able', 11]
+
+
+# print(*sorted(mixed_list, key=lambda x: (type(int), t
+
+
+# def left_bound(lst, value):
+#     left = -1
+#     right = len(lst)
+
+#     while right - left > 1:
+#         middle = (left + right) // 2
+#         if lst[middle] < value:
+#             left = middle
+#         else:
+#             right = middle
+            
+#     return left
+
+# def right_bound(lst, value):
+#     left = -1
+#     right = len(lst)
+
+#     while right - left > 1:
+#         middle = (left + right) // 2
+#         if lst[middle] <= value:
+#             left = middle
+#         else:
+#             right = middle
+            
+#     return right
+
+# # ...existing code...
+
+# lst = [1, 2, 2, 2, 3, 5]
+# value = 2
+
+# l = left_bound(lst, value)   # 0 (последний элемент < 2 на позиции 0)
+# r = right_bound(lst, value)  # 4 (первый элемент > 2 на позиции 4)
+# count = r - l - 1             # 3 (три двойки в списке)
+
+# print(f"Левая граница: {l}, Правая граница: {r}, Количество: {count}")
+# # Вывод: Левая граница: 0, Правая граница: 4, Количество: 3
+
+
+
+# abscissas = list(map(float, input().split()))
+# ordinates = list(map(float, input().split()))
+# applicates = list(map(float, input().split()))
+# points = zip(abscissas, ordinates, applicates)  
+
+# print(all(map(lambda x, y, z: x**2 + y**2 + z**2 >4, abscissas, ordinates, applicates)))
+
+
+# start = int(input())
+# end = int(input())
+# lst =list(range(start, end + 1))
+# lst = filter(lambda x: '0' not in str(x) and all(x % int(num) == 0 for num in str(x)), lst)
+
+# print(*lst)
+
+
+# def calculate_min_cost(n: int, price: list):
+#     k = [0] * (n + 1)
+#     k[0] = float('-inf')
+#     k[1] = price[1]
+#     k[2] = k[1] + price[2]
+#     k[3] = min(k[1], k[2]) + price[3]
     
-def speed_increase():                      # функция обратного вызова
-  global speed
-  speed += 1
-
-def speed_decrease():                      # функция обратного вызова
-  global speed
-  speed -= 1
-
-turtle.showturtle()                        # отображаем черепашку
-turtle.pensize(3)                          # устанавливаем размер пера
-turtle.Screen().listen()                   # устанавливаем фокус на экран черепашки
-
-turtle.Screen().onkey(move_up, 'Up')       # регистрируем функцию на нажатие клавиши наверх
-turtle.Screen().onkey(move_down, 'Down')   # регистрируем функцию на нажатие клавиши вниз
-turtle.Screen().onkey(move_left, 'Left')   # регистрируем функцию на нажатие клавиши налево
-turtle.Screen().onkey(move_right, 'Right') # регистрируем функцию на нажатие клавиши направо
-turtle.Screen().onkey(change, 'space')
-turtle.Screen().onkey(speed_increase, 'q')
-turtle.Screen().onkey(speed_decrease, 'w')  
-
-
-
-
-
+    
+#     for i in range(4, n + 1):
+#         if i % 3 == 0:
+#             k[i] = min(k[i - 1], k[i - 2], k[i // 3]) + price[i]
+#         else:
+#              k[i] = min(k[i - 1], k[i - 2]) + price[i]
+             
+#     path = []
+             
+#     for i in range(n, 1, -1):
+#         if i % 3 == 0:
+#             prev = min(
+    
+    
+    
+    
+    
+#     return k[n]
+    
+    
+    
+# print(calculate_min_cost(9, [0, 2, 2, 10, 4, 5, 20, 7, 8, 9]))
 
 
 
+# password = input()
+# if len(password) > 6:
+#     low = any(map(lambda ch: ch.islower(), password))
+#     high = any(map(lambda ch: ch.isupper(), password))
+#     digit = any(map(lambda ch: ch.isdigit(), password))
+
+# print(['NO', 'YES'][int(all([low, high, digit]))])
+
+
+
+# def generate_letter(mail, name, date, time, place, teacher='Тимур Гуев', number=17):
+#     return f'''
+# To: {mail} \n
+# Приветствую, {name}!  \n
+# Вам назначен экзамен, который пройдет {date}, в {time}. \n
+# По адресу: {place}.  \n
+# Экзамен будет проводить {teacher} в кабинете {number}. \n
+# Желаем удачи на экзамене!
+# '''
+    
+    
+            
+
+# print(generate_letter('lara@yandex.ru', 'Лариса', '10 декабря', '12:00', 'Часова 23, корпус 2'))
+# print()
+# print(generate_letter('lara@yandex.ru', 'Лариса', '10 декабря', '12:00', 
+#                       'Часова 23, корпус 2', 'Василь Ярошевич', 23))
+
+
+# def concat(*args, sep=' '):
+#     if len(args) <= 1:
+#         return ''.join(args)
+#     res = ''
+#     for i, arg in enumerate(args):
+#         res += str(arg) + sep
+#         if i == len(args) - 2:
+#             res += str(args[i + 1])
+#             return res
+    
+
+
+
+# print(concat('hello', 'python', 'and', 'stepik'))
+# print(concat('hello', 'python', 'and', 'stepik', sep='*'))
+# print(concat('hello', 'python', sep='()()()'))
+# print(concat('hello', sep='()'))
+# print(concat(1, 2, 3, 4, 5, 6, 7, 8, 9, sep='$$'))
+
+
+
+# from random import choice as ch
+
+# file = open('/home/almaz/lines.txt', 'r')   # по умолчанию режим доступа для чтения ('r')
+
+# print(ch(file.readlines()))
+
+# file.close()
+
+
+
+# def move_zeros(array):
+#     for i in array:
+#         if i == 0:
+#             array.remove(i) # Remove the element from the array
+#             array.append(i) # Append the element to the end
+#     return array
+
+
+
+# print(move_zeros([0, 1, 0, 0]))
+
+
+
+# with open('lines.txt') as file:
+#     largest = max(file.readlines(), key=len)
+#     print(largest.strip())
+
+#     file.seek(0)
+#     flag = False
+
+#     for line in file:
+#         if flag and len(line) == len(largest):
+#             print(line.strip())
+            
+#         elif line == largest:
+#             flag = True
+
+
+# with open('nums.txt') as file:
+#     total = 0
+#     for line in file:
+#         for row in line.split():
+#             if row.isdigit():
+#                 total += int(row)
+#                 continue
+            
+#             num = ''
+#             flag = False
+  
+#             for i in range(len(row)):
+#                 if row[i].isdigit():
+#                     flag = True
+#                     num += row[i]
+#                     continue
+                    
+#                 if flag:
+#                     total += int(num)
+#                     num = ''
+#                     flag = False
+                    
+#             if flag:
+#                 total += int(num)
+#                 num = ''
+#                 flag = False
+            
+            
+# print(total)               
+
+
+
+
+# with open('file.txt', encoding='utf-8') as file:
+#     lines = 0
+#     words = 0
+#     chars = 0
+
+#     for lines, row in enumerate(file, 1):
+#         words += len(row.split())
+#         chars += sum(ch.isalpha() for ch in row)
+
+# print(f"""Input file contains:
+# {chars} letters
+# {words} words
+# {lines} lines""")
+        
+        
+# from random import choice as ch
+       
+    
+# with open('first_names.txt') as names, open('last_names.txt') as surnames:
+#     names, surnames = list(names), list(surnames)
+#     for _ in range(3):
+#         name = ch(names).strip()
+#         surname = ch(surnames).strip()
+#         print(f'{name} {surname}')
+    
+    
+# with open('population.txt') as file:
+#     for line in file:
+#         city, population = line.split('\t')
+        
+#         if city.startswith('G') and int(population) > 500_000:
+#             print(city)
+    
+    
+# def read_csv():
+#     lst = []
+#     with open('data.csv') as file:
+#         keys = file.readline().strip().split(',')
+#         for line in file:
+#             values = line.strip().split(',')
+#             info = {key: value for key, value in zip(keys, values)}
+            
+#             lst.append(info)
+            
+#         return lst
+    
+# print(read_csv())
+    
+    
+    
+    
+    
+# with open('goats.txt') as goats, open('answer.txt', 'w') as answer:
+#     goats.readline()
+    
+#     colours = {}
+#     for counter, line in enumerate(goats):
+#         if line.strip() == 'GOATS':
+#             continue
+#         colour = line.strip().split()[0]
+#         colours[colour] = colours.get(colour, -1) + 1
+    
+#     verify = (counter - len(colours)) * 0.07
+#     for colour, т in sorted(colours.items()):
+#         if counter >= verify:
+#             print(f'{colour} goat', end='\n', file=answer)
+        
+
+# with open('words.txt') as words:
+#     largests = []
+#     max_len = 0
+#     word = ''
+#     for line in words:
+#         for ch in line:
+#             if ch != ' ' and ch != '\n':
+#                 word += ch
+#                 continue
+#             if len(word) > max_len:
+#                 max_len = len(word)
+#                 largests = [word]
+#             elif len(word) == max_len:
+#                 largests.append(word)
+                
+#             word = ''
+            
+            
+# with open('words.txt') as words:
+#     largests = []
+#     max_len = 0
+
+#     for line in words:
+#         for word in line.rstrip().split():
+#             if len(word) > max_len:
+#                 max_len = len(word)
+#                 largests = [word]
+#             elif len(word) == max_len:
+#                 largests.append(word)
+            
+# with open('forbidden_words.txt') as forb, open('data3.txt', 'r') as inp:
+#     forb = forb.read().split()
+#     s = inp.read()
+#     s_lower = s.lower()
+#     for word in forb:
+#         s_lower = s_lower.replace(word, '*' * len(word))
+    
+#     res = ''.join(s[i] if s_lower[i] != '*' else '*' for i in range(len(s)))
+    
+#     with open('data3.txt', 'w') as out:
+#         out.write(res)
+
+#     print(res)
+     
+        
+
+
+# with open('transliteration.txt', 'w') as out, open('cyrillic.txt') as inp:
+#     d = {
+#     'а': 'a', 'к': 'k', 'х': 'h', 'б': 'b', 'л': 'l', 'ц': 'c', 'в': 'v', 'м': 'm', 'ч': 'ch',
+#     'г': 'g', 'н': 'n', 'ш': 'sh', 'д': 'd', 'о': 'o', 'щ': 'shh', 'е': 'e', 'п': 'p', 'ъ': '*',
+#     'ё': 'jo', 'р': 'r', 'ы': 'y', 'ж': 'zh', 'с': 's', 'ь': "'", 'з': 'z', 'т': 't', 'э': 'je',
+#     'и': 'i', 'у': 'u', 'ю': 'ju', 'й': 'j', 'ф': 'f', 'я': 'ya'
+#     }
+#     for s in inp.read():
+#         res = d.get(s.lower(), s)
+#         out.write(res if s.islower() else res.capitalize())
+
+
+# with open('data3.txt') as file:
+#     flag = False
+#     lst = []
+#     for line in file:
+#         if 'def ' in line and flag is False:
+#             start = line.find(' ') + 1
+#             end = line.find('(')
+#             name = line[start: end]
+#             lst.append(name)
+            
+#         elif '#' in line:
+#             flag = True
+            
+#         elif 'def ' in line and flag:
+#             flag = False
+            
+# print(*lst, sep='\n')
+            
+            
+# def lcs(a, b):
+#     n, m = len(a) + 1, len(b) + 1
+    
+#     dp = [[0] * m for _ in range(n)]
+    
+#     for i in range(1, n):
+#         for j in range(1, m):
+#             if a[i - 1] == b[j - 1]:
+#                 dp[i][j] = dp[i - 1][j - 1] + 1
+#             else:
+#                 dp[i][j] = max(dp[i - 1][j], dp[i][j  - 1]) 
+                
+#     res = []
+    
+#     i, j = n - 1, m - 1
+#     while i > 0 and j > 0:
+#         if a[i - 1] == b[j - 1]:
+#             res.append(a[i - 1])
+#             i -= 1
+#             j -= 1
+#         elif dp[i - 1][j] >= dp[i][j - 1]:
+#             i -= 1
+#         else:
+#             j -= 1
+            
+                
+#     return dp[-1][-1], res[::-1]
+               
+# def lis(a):
+#     dp = [1] * len(a)
+#     prev = [-1] * len(a)
+#     for i in range(1, len(a)):
+#         for j in range(i):
+#             if a[j] < a[i] and dp[j] + 1 > dp[i]:
+#                 dp[i] = dp[j] + 1
+#                 prev[i] = j
+                
+#     best = max(range(len(a)), key=lambda x: dp[x])
+#     res = []
+            
+#     idx = best
+#     while idx > -1:
+#         res.append(a[idx])
+#         idx = prev[idx]
+
+#     return dp[best], res[::-1]
+
+
+# def test():
+#     # s1 = [1, 2, 3, 4, 5, 6]
+#     # s2 = [3, 4, 6, 8, 9]
+#     # print(lcs(s1, s2))    
+#     print(*lis([1, 4, 3, 8, 5, 9]))
+
+
+        
+# test()
+
+
+# def search_substring(s, sub):
+#     t = sub + '@' + s
+#     match = [0] * len(t)
+#     res = []
+
+#     for i in range(1, len(t)):
+#         p = match[i - 1]
+
+#         while p > 0 and t[i] != t[p]:
+#             p = match[p - 1]
+
+#         if t[i] == t[p]:
+#             p += 1
+
+#         match[i] = p
+
+#         if p == len(sub):
+#             res.append(i - 2 * len(sub)) 
+            
+#     return res
+
+# l = 'ababa'
+# test = search_substring(l, 'aba')
+# print(test)
+
+# for i in test:
+#     print(l[i])
+
+
+
+# lst = [1, 2, 3, 4, 5, 6, 7, 8, 3, 5, 1, 10]
+
+
+# print(min(lst[5:], key=lambda x: lst[x]))
+# print(lst[10])
+
+
+# class Cat:
+#     eyes = 2
+#     def __init__(self, name):
+#         self.name = name
+#         self.hungry = 5
+#     def eat(self):
+#         self.hungry -= 2
+
+# my_cat = Cat('Pussy')
+# print(my_cat.eyes)
+# my_cat.eat()
+# print(my_cat.hungry)
 
 
 
@@ -916,3 +1671,45 @@ turtle.Screen().onkey(speed_decrease, 'w')
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+    
+    
+    
+    
+    
+    
