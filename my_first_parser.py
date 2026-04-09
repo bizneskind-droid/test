@@ -6,13 +6,33 @@ import csv
 import time
 
 
-def get_news(session, past_news: set) -> set:
+def bootstrap_parser():
     if not os.path.exists('news.csv'):
         with open('news.csv', 'w') as f:
             csv_header = ['Time', 'Title', 'Text', 'Url']
             writer = csv.writer(f)
             writer.writerow(csv_header)
-  
+    else:
+        with open('news.csv', encoding='utf-8') as news:
+            news = {row[3] for row in news}
+    
+    session = req.Session()
+    session.headers.update({'user-agent': UserAgent().random,})
+
+    try:
+        cooldown = int(input("Введите время в секундах для проверки новостей: "))
+        if cooldown <= 0:
+            raise ValueError("Задержка должна быть больше 0.")
+    except ValueError as e:
+        cooldown = 300
+        print(f"{e}")
+        print("Установлено значение по умолчанию: 300 секунд.")
+    
+    return session, news, cooldown
+        
+
+def get_news(session, past_news: set) -> set:
+    
     source_url = 'https://www.benzinga.com'
     market_url = source_url + '/markets'
     
@@ -80,11 +100,8 @@ def get_news(session, past_news: set) -> set:
     return set(res['urls'])
 
 
-news = set()
-session = req.Session()
-session.headers.update({'user-agent': ua.random,})
-cooldown = int(input("Введите время в секундах для проверки новостей: "))
-cooldown = cooldown if cooldown >= 1 else 300
+session, news, cooldown = bootstrap_parser()
+
 while True:
     news |= get_news(session, news)
     print(news)
