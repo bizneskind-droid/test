@@ -8,14 +8,17 @@ import time
 
 def bootstrap_parser():
     if not os.path.exists('news.csv'):
-        with open('news.csv', 'w') as f:
+        with open('news.csv', 'w', newline='') as f:
             csv_header = ['Time', 'Title', 'Text', 'Url']
             writer = csv.writer(f)
             writer.writerow(csv_header)
+            news = set()
     else:
         with open('news.csv', encoding='utf-8') as news:
-            news = {row[3] for row in news}
-    
+            reader = csv.reader(nees)
+            next(reader, None)
+            news = {row[3] for row in reader}
+            
     session = req.Session()
     session.headers.update({'user-agent': UserAgent().random,})
 
@@ -45,12 +48,10 @@ def get_news(session, past_news: set) -> set:
 
     html = BS(response.text, 'html.parser')
     news = html.select('.flex.flex-col.justify-between.w-full .text-\\[inherit\\]')
-    res = {
-        "time": [],
-        "titles": [],
-        "text": [],
-        "urls": [],
-    }
+    times = []
+    titles = []
+    texts = []
+    urls = []
     
     for new in news:
         href = new.get('href')
@@ -67,13 +68,13 @@ def get_news(session, past_news: set) -> set:
         if url in past_news:
             continue
 
-        res['titles'].append(title)
-        res['urls'].append(url)
+        titles.append(title)
+        urls.append(url)
 
-    if res['urls'] == []:
+    if not urls:
         return set()
 
-    for url in res['urls']:
+    for url in urls:
         try:
             resp = session.get(url, timeout=10)
             resp.raise_for_status()
@@ -86,18 +87,17 @@ def get_news(session, past_news: set) -> set:
         text = [sentence.text for sentence in sentences[:-3]]
         current_time = time.strftime("%Y-%m-%d %H:%M:%S")
         
-        res['text'].append(' '.join(text))
-        res['time'].append(current_time)
+        texts.append(' '.join(text))
+        times.append(current_time)
 
         time.sleep(1)
 
     with open('news.csv', 'a', encoding='utf-8', newline='') as f:
         writer = csv.writer(f)
-
-        ready_news = list(zip(*res.values()))
+        ready_news = zip(times, titles, texts, urls)
         writer.writerows(ready_news)
 
-    return set(res['urls'])
+    return set(urls)
 
 
 session, news, cooldown = bootstrap_parser()
