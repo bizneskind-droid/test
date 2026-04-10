@@ -2,23 +2,86 @@ import requests as req
 from bs4 import BeautifulSoup as BS
 from fake_useragent import UserAgent
 import os
-import csv
 import time
+import psycopg2
+from psycopg2.extensions import connection
+from psycopg2.extras import execute_values
 
 
-def bootstrap_parser():
-    if not os.path.exists('news.csv'):
-        with open('news.csv', 'w', newline='') as f:
-            csv_header = ['Time', 'Title', 'Text', 'Url']
-            writer = csv.writer(f)
-            writer.writerow(csv_header)
-            news = set()
-    else:
-        with open('news.csv', encoding='utf-8') as news:
-            reader = csv.reader(nees)
-            next(reader, None)
-            news = {row[3] for row in reader}
+def check_old_news(all_urls: list[str], DSN: str) -> set[str]:
+    conn = psycopg2.connect(DSN)
+    existing_urls = set()
+    
+    try:
+        with conn, conn.cursor() as cur:
+            cur.execute('''
+                SELECT url FROM news
+                WHERE url = ANY(%s)            
+            ''', (all_urls,))
             
+            existing_urls = {row[0] for row in cur.fetchall()}
+        
+    except psycopg2.Error as e:
+        print(f"Database error: {e.pgcode} - {e.pgerror}")
+    except Exception as e:
+        print(f"Error: {type(e).__name__} - {e}")|
+    finally:
+        conn.close()
+        
+    return existing_urls
+    
+    
+def create_db() -> str:
+    DSN = "postgresql://test_user:123@localhost:5432/parser"
+    conn = psycopg2.connect(DSN)
+    
+    try:
+        with conn, conn.cursor() as cur:
+            cur.execute("""
+            CREATE TABLE IF NOT EXISTS news (
+                id INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+                time TIMESTAMP DEFAULT NOW(),
+                title TEXT DEFAULT 'Nothing',
+                text TEXT DEFAULT 'Nothing',
+                url VARCHAR(300) UNIQUE
+                );
+        """)
+        
+    except psycopg2.Error as e:
+        print(f"Database error: {e.pgcode} - {e.pgerror}")
+    finally:
+        conn.close()
+        
+    return DSN
+
+
+def update_db(DSN: str, already_news: list) -> list[tuple[int, str]]:
+    conn = psycopg2.connect(DSN)
+    res = []
+    
+    try:
+        with conn, conn.cursor() as cur:
+            res = execute_values(
+                cur, 
+                '''
+                INSERT INTO news (time, title, text, url)
+                VALUES %s 
+                ON CONFLICT (url) DO NOTHING
+                RETURNING id, url;
+                ''', already_news,
+                fetch=True
+                )           
+        
+    except psycopg2.Error as e:
+        print(f"Database error: {e.pgcode} - {e.pgerror}")
+    finally:
+        conn.close()
+        
+    return res 
+        
+    
+def bootstrap_parser():
+    DSN = create_db()        
     session = req.Session()
     session.headers.update({'user-agent': UserAgent().random,})
 
@@ -31,10 +94,10 @@ def bootstrap_parser():
         print(f"{e}")
         print("Установлено значение по умолчанию: 300 секунд.")
     
-    return session, news, cooldown
+    return session, cooldown, DSN
         
 
-def get_news(session, past_news: set) -> set:
+def get_news(session: req.Session, DSN: str):
     
     source_url = 'https://www.benzinga.com'
     market_url = source_url + '/markets'
@@ -44,15 +107,16 @@ def get_news(session, past_news: set) -> set:
         response.raise_for_status()
     except req.RequestException as e:
         print(f"Ошибка: {e}")
-        return set()
+        return 
 
     html = BS(response.text, 'html.parser')
     news = html.select('.flex.flex-col.justify-between.w-full .text-\\[inherit\\]')
     times = []
-    titles = []
     texts = []
-    urls = []
-    
+    temp_dict: dict[str, str] = {}
+    all_urls = []
+    res = []
+
     for new in news:
         href = new.get('href')
         if not href:
@@ -64,17 +128,21 @@ def get_news(session, past_news: set) -> set:
 
         title = title_tag.get_text(strip=True)
         url = source_url + href
+        
+        all_urls.append(url)
+        temp_dict[url] = title
+        
+    existing_urls = check_old_news(all_urls, DSN)
+    temp_dict = {
+        url: title
+        for url, title in temp_dict.items()
+        if url not in existing_urls
+    }
 
-        if url in past_news:
-            continue
+    if not temp_dict:
+        return 
 
-        titles.append(title)
-        urls.append(url)
-
-    if not urls:
-        return set()
-
-    for url in urls:
+    for url, title in temp_dict.items():
         try:
             resp = session.get(url, timeout=10)
             resp.raise_for_status()
@@ -84,25 +152,34 @@ def get_news(session, past_news: set) -> set:
         
         html_txt = BS(resp.text, 'html.parser')
         sentences = html_txt.select('.block.core-block')
-        text = [sentence.text for sentence in sentences[:-3]]
+        text = [sentence.text for sentence in sentences[:-1]]
         current_time = time.strftime("%Y-%m-%d %H:%M:%S")
         
-        texts.append(' '.join(text))
-        times.append(current_time)
+        res.append((
+        current_time,
+        title,
+        ' '.join(text),
+        url
+        ))
 
         time.sleep(1)
 
-    with open('news.csv', 'a', encoding='utf-8', newline='') as f:
-        writer = csv.writer(f)
-        ready_news = zip(times, titles, texts, urls)
-        writer.writerows(ready_news)
 
-    return set(urls)
+    return update_db(DSN, res)
 
 
-session, news, cooldown = bootstrap_parser()
+if __name__ == "__main__":
+    session, cooldown, DSN = bootstrap_parser()
 
-while True:
-    news |= get_news(session, news)
-    print(news)
-    time.sleep(cooldown)
+    while True:
+        try:
+            latest_news = get_news(session, DSN)
+            if latest_news:
+                for news_id, url in latest_news:
+                    print(f"Добавлена новость с id: {news_id}\nURL: {url}")
+            else:
+                print("Новостей нет.")
+        except Exception as e:
+            print(f"Критическая ошибка в главном цикле: {e}")
+        
+        time.sleep(cooldown)
